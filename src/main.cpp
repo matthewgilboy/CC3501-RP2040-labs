@@ -2,37 +2,45 @@
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "hardware/pio.h"
-
 #include "WS2812.pio.h" // This header file gets produced during compilation from the WS2812.pio file
 #include "drivers/logging/logging.h"
+#include <iostream>
+#include "QualityCheck.h"
 
-#define LED_PIN 14
+int main() {
+    // Sample values from sensors
+    float weightSensorValue = 155.0;
+    int detectedShape = 1;  // Assume 1 represents a certain shape
+    int detectedRed = 255, detectedGreen = 100, detectedBlue = 50;
+    
+    // Acceptable weight range
+    float minWeight = 150.0;
+    float maxWeight = 160.0;
 
-int main()
-{
-    stdio_init_all();
+    // Acceptable shape and color values
+    int acceptableShape = 1;
+    int acceptableRed = 255, acceptableGreen = 100, acceptableBlue = 50;
 
-    // Initialise PIO0 to control the LED chain
-    uint pio_program_offset = pio_add_program(pio0, &ws2812_program);
-    ws2812_program_init(pio0, 0, pio_program_offset, LED_PIN, 800000, false);
-    uint32_t led_data [1];
+    // Perform the weight check with a range
+    if (checkWeight(weightSensorValue, minWeight, maxWeight)) {
+        std::cout << "Weight is acceptable." << std::endl;
+    } else {
+        std::cout << "Weight is unacceptable." << std::endl;
+    }
 
-    for (;;) {
-        // Test the log system
-        log(LogLevel::INFORMATION, "Hello world");
+    // Perform the shape check
+    if (checkShape(detectedShape, acceptableShape)) {
+        std::cout << "Shape is acceptable." << std::endl;
+    } else {
+        std::cout << "Shape is unacceptable." << std::endl;
+    }
 
-        // Turn on the first LED to be a certain colour
-        uint8_t red = 0;
-        uint8_t green = 0;
-        uint8_t blue = 255;
-        led_data[0] = (red << 24) | (green << 16) | (blue << 8);
-        pio_sm_put_blocking(pio0, 0, led_data[0]);
-        sleep_ms(500);
-
-        // Set the first LED off 
-        led_data[0] = 0;
-        pio_sm_put_blocking(pio0, 0, led_data[0]);
-        sleep_ms(500);
+    // Perform the color check
+    if (checkColor(detectedRed, detectedGreen, detectedBlue, 
+                   acceptableRed, acceptableGreen, acceptableBlue)) {
+        std::cout << "Color is acceptable." << std::endl;
+    } else {
+        std::cout << "Color is unacceptable." << std::endl;
     }
 
     return 0;
