@@ -32,7 +32,13 @@ if(CrossCompiling)
         PUBLIC
         src/main.cpp
         src/drivers/logging/logging.cpp
-        src/QualityCheck.cpp
+        src/drivers/sensors/loadcell/loadcell.cpp
+        src/drivers/sensors/accelerometer/accelerometer.cpp
+        src/drivers/sensors/magneticswitch/magneticswitch.cpp
+        src/drivers/sensors/ultrasonic/ultrasonic.cpp
+        src/drivers/driving/servo/servo.cpp
+        src/drivers/driving/stepper/stepper.cpp
+        src/drivers/logic/QualityCheck.cpp
     )
     target_include_directories(labs
         PUBLIC 
@@ -78,6 +84,10 @@ else()
         PUBLIC
         src/main.cpp
         src/drivers/logging/logging.cpp
+        src/drivers/sensors/loadcell/loadcell.cpp
+        src/drivers/sensors/accelerometer/accelerometer.cpp
+        src/drivers/sensors/magneticswitch/magneticswitch.cpp
+        src/drivers/sensors/ultrasonic/ultrasonic.cpp
         src/QualityCheck.cpp
         tests/mocks/pico/stdlib.cpp
         tests/mocks/pico/time.cpp
