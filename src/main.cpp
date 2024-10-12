@@ -81,6 +81,7 @@ int main() {
 
         else if (mode == 2) {
             printf("Testing Ultrasonic Sensor\n");
+            printf("Running Mode 2");
         }
     }
 return 0;
