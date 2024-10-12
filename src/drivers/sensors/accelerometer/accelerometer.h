@@ -6,26 +6,44 @@
 
 // Struct to store accelerometer values
 struct Vector3D {
-    int16_t x;
-    int16_t y;
-    int16_t z;
+    int16_t x;  // X-axis acceleration value
+    int16_t y;  // Y-axis acceleration value
+    int16_t z;  // Z-axis acceleration value
 };
 
 // Declare global variable `values` as extern to use in other files
 extern Vector3D values;  // Declare the accelerometer values struct as extern
 
 // LIS3DH accelerometer functions
-void LIS3DH_init();  // Initializes the LIS3DH accelerometer
-void LIS3DH_deinit();  // Deinitializes the LIS3DH accelerometer
-int LIS3DH_writeRegister(uint8_t reg, uint8_t value);  // Writes to a register
-int LIS3DH_readRegister(uint8_t reg, uint8_t *value);  // Reads from a register
-int LIS3DH_readAccelValues();  // Reads raw acceleration values
-std::string LIS3DH_getCurrentReadings();  // Returns formatted string of current readings
-int LIS3DH_updateReadings();  // Updates internal readings
-float getXTilt();  // Calculates the X tilt (roll) in degrees
-float getYTilt();  // Calculates the Y tilt (pitch) in degrees
 
-// Getter function for ACC_CONVERSION_RATIO
-float getAccConversionRatio();  // Returns the conversion ratio for accelerometer readings
+// Initializes the LIS3DH accelerometer
+void LIS3DH_init();  
 
-#endif  // LIS3DH_H
+// Deinitializes the LIS3DH accelerometer
+void LIS3DH_deinit();  
+
+// Writes a value to a specified register in the accelerometer
+int LIS3DH_writeRegister(uint8_t reg, uint8_t value);  
+
+// Reads a value from a specified register in the accelerometer
+int LIS3DH_readRegister(uint8_t reg, uint8_t *value);  
+
+// Reads raw acceleration values from the accelerometer and updates the `values` struct
+int LIS3DH_readAccelValues();  
+
+// Returns a formatted string of the current accelerometer readings (X, Y, Z)
+std::string LIS3DH_getCurrentReadings();  
+
+// Updates internal readings from the accelerometer and checks tilt limits
+int LIS3DH_updateReadings();  
+
+// Calculates the X tilt (roll) in degrees based on accelerometer data
+float getXTilt();  
+
+// Calculates the Y tilt (pitch) in degrees based on accelerometer data
+float getYTilt();  
+
+// Returns the conversion ratio for accelerometer readings (used for scaling)
+float getAccConversionRatio();  
+
+#endif  // accelerometer_H

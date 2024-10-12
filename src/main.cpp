@@ -85,6 +85,20 @@ int main() {
         }
     }
 return 0;
+// if accelerometer_detect < tilt limit
+//     if ultrasonic_sensor_detect = true
+//         stop stepper motor
+//         tell raspberry pi to analyse object
+//         tell raspberry pi to take photo
+//         get sensor data from
+//             weight sensor
+//             pi capture values
+//         communicate values to determine good or bad
+//         move stepper motor to move object to servo
+//         move servo arm to move object into good or bad pile
+
+// else if accelerometer_detect >= tilt
+//     stop all
 }
 //     // Sample values from sensors
 //     float weightSensorValue = 155.0;
