@@ -11,6 +11,7 @@
 #include "drivers/logic/QualityCheck.h"
 #include "drivers/driving/servo/servo.h"
 #include "drivers/driving/stepper/stepper.h"
+#include "drivers/logic/Case.h"
 
 #define EMGNCY_SW 2
 #define HOME_1 3
@@ -41,19 +42,47 @@
 #define nRESET 28
 #define RST 29
 
+#define SERVO_0_DEG 1000
+#define SERVO_90_DEG 1500
+#define SERVO_180_DEG 2000
+
+int mode = 0;
+
 int main() {
     stdio_init_all();
     init_Mag_Switch(MAGSIG);
+    init_SG90_servo();
     
     while (true){
-        if (Mag_Switch_Active_True(MAGSIG)){
-            printf("%d", 1);
-        } else {
-            printf("%d", 0);
+        int mode = get_switch_state();
+        
+        if (mode == 0) {
+            printf("Testing Magnetic Sensor\n");
+            while (true){
+                // Check if the magnetic switch is active and print the result
+                printf("%d\n", Mag_Switch_Active_True(MAGSIG) ? 1 : 0);
+                sleep_ms(100); // Wait for 100 ms
+            }
         }
-        sleep_ms(100);
-    }
 
+        else if (mode == 1) {
+            printf("Testing Servo\n");
+            while (true){
+                set_SG90_servo_pos(SERVO_0_DEG);
+                sleep_ms(1000);
+
+                set_SG90_servo_pos(SERVO_90_DEG);
+                sleep_ms(1000);
+
+                set_SG90_servo_pos(SERVO_180_DEG);
+                sleep_ms(1000);
+            }
+        }
+
+        else if (mode == 2) {
+            printf("Testing Ultrasonic Sensor\n");
+        }
+    }
 return 0;
 }
 //     // Sample values from sensors
