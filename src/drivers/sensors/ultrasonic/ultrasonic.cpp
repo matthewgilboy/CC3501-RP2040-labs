@@ -57,9 +57,9 @@ int main()
     stdio_init_all();  // Initialize all the standard I/O for debugging
 
     // Initialize the WS2812 LED program
-    uint pio_program_offset = pio_add_program(pio0, &ws2812_program);
-    ws2812_program_init(pio0, 0, pio_program_offset, LED_PIN, 800000, false); // Configure WS2812 LED settings
-    uint32_t led_data[1];  // Create an array to hold LED color data
+    // uint pio_program_offset = pio_add_program(pio0, &ws2812_program);
+    // ws2812_program_init(pio0, 0, pio_program_offset, LED_PIN, 800000, false); // Configure WS2812 LED settings
+    // uint32_t led_data[1];  // Create an array to hold LED color data
 
     for (;;) {
         measure_trig_pulse_duration();  // Trigger the ultrasonic sensor and measure the pulse
@@ -72,14 +72,14 @@ int main()
         // Control the LED based on the distance measured
         if (distance_cm < DISTANCE_THRESHOLD) {
             // Turn on the LED with green color if the distance is below the threshold
-            led_data[0] = (0 << 24) | (255 << 16) | (0 << 8);  // Green color
+            //led_data[0] = (0 << 24) | (255 << 16) | (0 << 8);  // Green color
         } else {
             // Turn off the LED if the distance is above the threshold
-            led_data[0] = 0;  // No color (LED off)
+            //led_data[0] = 0;  // No color (LED off)
         }
 
         // Send the LED data to the WS2812 LED
-        pio_sm_put_blocking(pio0, 0, led_data[0]);
+        //pio_sm_put_blocking(pio0, 0, led_data[0]);
 
         sleep_ms(500);  // Wait before checking the distance again
     }
