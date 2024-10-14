@@ -3,6 +3,7 @@
 
 // Function prototypes for stepper motor control
 void init_stepper();           // Initializes the stepper motor driver and GPIO pins
-void move_stepper(int steps, int direction); // Moves the stepper motor a specified number of steps in a given direction
+int moveStepper(bool run, bool dir);
+void setMicroSteps(int steps);
 
 #endif // STEPPER_H
