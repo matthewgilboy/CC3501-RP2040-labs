@@ -8,7 +8,7 @@
 #define I2C_INSTANCE i2c0  // I2C instance to be used
 #define LIS3DHTR_SDA 16     // GPIO pin for I2C SDA
 #define LIS3DHTR_SCL 17     // GPIO pin for I2C SCL
-#define I2C_ADDRESS 0x19    // I2C address of the LIS3DH accelerometer
+#define I2C_ADDRESS 0x18    // I2C address of the LIS3DH accelerometer
 #define START_ADDR 0x28     // Starting register address for reading accelerometer data
 #define ACC_CONVERSION_RATIO (32768 / 2)  // Conversion ratio for ±2g full scale
 
@@ -41,12 +41,14 @@ float getAccConversionRatio() {
     return ACC_CONVERSION_RATIO;  // Return the conversion ratio for acceleration
 }
 
-// Write a value to a specific accelerometer register
 int LIS3DH_writeRegister(uint8_t reg, uint8_t value) {
     uint8_t data[2] = {reg, value};  // Prepare data to write
+    printf("Attempting to write 0x%X to register 0x%X\n", value, reg);
+    
     // Attempt to write data to the specified register
-    if (i2c_write_blocking(I2C_INSTANCE, I2C_ADDRESS, data, 2, false) != 2) {
-        printf("Failed to write to register 0x%X\n", reg);  // Log error if write fails
+    int result = i2c_write_blocking(I2C_INSTANCE, I2C_ADDRESS, data, 2, false);
+    if (result != 2) {
+        printf("Failed to write to register 0x%X (error code: %d)\n", reg, result);  // Log error if write fails
         return -1;  // Return error code
     }
     return 0;  // Return success

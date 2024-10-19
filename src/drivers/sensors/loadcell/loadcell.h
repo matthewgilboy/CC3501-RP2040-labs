@@ -1,12 +1,26 @@
-#ifndef LOADCELL_H       // Include guard to prevent multiple inclusions of this header file
+// loadcell.h
+
+#ifndef LOADCELL_H
 #define LOADCELL_H
 
-#include <stdint.h>      // Include standard integer types for fixed-width integers
+// Include necessary libraries
+#include "GPIO_PINS.h"
+#include "pico/stdlib.h"
+#include "hardware/gpio.h"
 
-// Function to initialize the load cell setup
-void loadcell_init();
+// Function prototypes
+void load_cell_init();
+void wait_ready();
+long read_load_cell();
+void tare_load_cell();
+void set_scale(float scale);
+float get_scale();
+void set_offset(long offset);
+long get_offset();
+float get_units();
 
-// Function to read the load cell value
-int16_t read_load_cell();
+// Global variables for scale and offset
+extern float SCALE;  // Default scale value
+extern long OFFSET;  // Default offset value
 
 #endif // LOADCELL_H

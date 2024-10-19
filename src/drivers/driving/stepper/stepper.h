@@ -1,9 +1,12 @@
-#ifndef STEPPER_H               // Include guard to prevent multiple inclusions of this header file
+#ifndef STEPPER_H
 #define STEPPER_H
 
-// Function prototypes for stepper motor control
-void init_stepper();           // Initializes the stepper motor driver and GPIO pins
-int moveStepper(bool run, bool dir);
-void setMicroSteps(int steps);
+void InitialisePins();
 
-#endif // STEPPER_H
+void setMicroStep(int steps);
+
+int StepMotor(bool dir, int numberofsteps);
+
+void RunMotor(bool step);
+
+#endif

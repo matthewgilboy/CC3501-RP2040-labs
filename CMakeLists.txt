@@ -35,11 +35,13 @@ if(CrossCompiling)
         src/drivers/sensors/loadcell/loadcell.cpp
         src/drivers/sensors/accelerometer/accelerometer.cpp
         src/drivers/sensors/magneticswitch/magneticswitch.cpp
+        src/drivers/driving/stepper/stepper.cpp
         src/drivers/sensors/ultrasonic/ultrasonic.cpp
         src/drivers/driving/servo/servo.cpp
         src/drivers/driving/stepper/stepper.cpp
         src/drivers/logic/QualityCheck.cpp
         src/drivers/logic/Case.cpp
+        src/drivers/LED.cpp
     )
     target_include_directories(labs
         PUBLIC 
@@ -90,6 +92,7 @@ else()
         src/drivers/sensors/accelerometer/accelerometer.cpp
         src/drivers/sensors/magneticswitch/magneticswitch.cpp
         src/drivers/sensors/ultrasonic/ultrasonic.cpp
+        src/drivers/driving/stepper/stepper.cpp
         src/drivers/logic/QualityCheck.cpp
         tests/mocks/pico/stdlib.cpp
         tests/mocks/pico/time.cpp
@@ -97,6 +100,8 @@ else()
         tests/mocks/hardware/pio.cpp
         tests/mocks/ws2812.cpp
         src/drivers/logic/Case.cpp
+        src/drivers/LED.cpp
+
 
     )
     target_include_directories(labs

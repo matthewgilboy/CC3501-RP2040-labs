@@ -1,0 +1,16 @@
+#include "drivers/sensors/magneticswitch/magneticswitch.h"
+#include "drivers/sensors/accelerometer/accelerometer.h"
+#include "drivers/sensors/loadcell/loadcell.h"
+#include "drivers/sensors/ultrasonic/ultrasonic.h"
+#include "drivers/logic/QualityCheck.h"
+#include "drivers/driving/servo/servo.h"
+#include "drivers/driving/stepper/stepper.h"
+#include "drivers/logic/Case.h"
+#include "drivers/Led.h"
+#include "pico/stdlib.h"
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+#include <pico/time.h>

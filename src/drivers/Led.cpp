@@ -4,9 +4,10 @@
 #include "hardware/gpio.h"
 #include "LED.h"
 #include "WS2812.pio.h"
+#include "GPIO_PINS.h"
 
 #define LED_PIN 14
-#define NUM_LEDS 12
+#define NUM_LEDS 1
 #define MAX_HUE 360  // Maximum hue value for rainbow
 #define TILT_THRESHOLD 5  // Minimum tilt angle in degrees to change LED position
 #define MAX_TILT_ANGLE 80
@@ -88,7 +89,7 @@ void rainbow(uint32_t *led_data, int sm, uint16_t *hue_offset) {
 
 // LAB8
 void init_pio_led(){ 
-uint32_t pio_program_offset = pio_add_program(pio0, &ws2812_program);
+uint pio_program_offset = pio_add_program(pio0, &ws2812_program);
 ws2812_program_init(pio0, 0, pio_program_offset, LED_PIN, 800000, false);
 uint32_t led_data[NUM_LEDS] = {0}; }// Array to hold data for 12 LEDs
 
