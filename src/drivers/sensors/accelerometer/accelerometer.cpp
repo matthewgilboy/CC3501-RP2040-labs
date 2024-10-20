@@ -1,4 +1,5 @@
 #include "accelerometer.h"
+
 #include <stdio.h>
 #include <math.h>  // Include math library for atan2 function
 #include "hardware/i2c.h"
@@ -14,6 +15,8 @@
 
 // Struct to store accelerometer values
 Vector3D values;  // Define the global variable declared as extern in the header
+
+uint32_t led_data[1];
 
 // Tilt threshold in degrees
 #define TILT_THRESHOLD 15.0  // Maximum allowed tilt angle before triggering an alert
@@ -44,7 +47,7 @@ float getAccConversionRatio() {
 int LIS3DH_writeRegister(uint8_t reg, uint8_t value) {
     uint8_t data[2] = {reg, value};  // Prepare data to write
     printf("Attempting to write 0x%X to register 0x%X\n", value, reg);
-    
+
     // Attempt to write data to the specified register
     int result = i2c_write_blocking(I2C_INSTANCE, I2C_ADDRESS, data, 2, false);
     if (result != 2) {

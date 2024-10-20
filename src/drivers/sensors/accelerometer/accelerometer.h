@@ -1,5 +1,5 @@
-#ifndef accelerometer_H
-#define accelerometer_H
+#ifndef ACCELEROMETER_H
+#define ACCELEROMETER_H
 
 #include <string>
 #include <stdint.h>  // For uint8_t, int16_t types
@@ -17,33 +17,33 @@ extern Vector3D values;  // Declare the accelerometer values struct as extern
 // LIS3DH accelerometer functions
 
 // Initializes the LIS3DH accelerometer
-void LIS3DH_init();  
+void LIS3DH_init();
 
 // Deinitializes the LIS3DH accelerometer
-void LIS3DH_deinit();  
+void LIS3DH_deinit();
 
 // Writes a value to a specified register in the accelerometer
-int LIS3DH_writeRegister(uint8_t reg, uint8_t value);  
+int LIS3DH_writeRegister(uint8_t reg, uint8_t value);
 
 // Reads a value from a specified register in the accelerometer
-int LIS3DH_readRegister(uint8_t reg, uint8_t *value);  
+int LIS3DH_readRegister(uint8_t reg, uint8_t *value);
 
 // Reads raw acceleration values from the accelerometer and updates the `values` struct
-int LIS3DH_readAccelValues();  
+int LIS3DH_readAccelValues();
 
 // Returns a formatted string of the current accelerometer readings (X, Y, Z)
-std::string LIS3DH_getCurrentReadings();  
+std::string LIS3DH_getCurrentReadings();
 
 // Updates internal readings from the accelerometer and checks tilt limits
-int LIS3DH_updateReadings();  
+int LIS3DH_updateReadings();
 
 // Calculates the X tilt (roll) in degrees based on accelerometer data
-float getXTilt();  
+float getXTilt();
 
 // Calculates the Y tilt (pitch) in degrees based on accelerometer data
-float getYTilt();  
+float getYTilt();
 
 // Returns the conversion ratio for accelerometer readings (used for scaling)
-float getAccConversionRatio();  
+float getAccConversionRatio();
 
-#endif  // accelerometer_H
+#endif  // ACCELEROMETER_H
