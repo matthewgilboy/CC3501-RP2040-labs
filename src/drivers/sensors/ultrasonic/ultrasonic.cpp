@@ -4,7 +4,7 @@
 
 #define TRIG 8                    // Define the pin for the ultrasonic sensor's trigger
 #define ECHO 9                    // Define the pin for the ultrasonic sensor's echo
-#define DISTANCE_THRESHOLD 8       // Define a distance threshold in centimeters
+//#define DISTANCE_THRESHOLD 8       // Define a distance threshold in centimeters
 
 // Global variables for tracking pulse timings
 //volatile uint32_t rise_time = 0;   // Variable to store the time of the rising edge

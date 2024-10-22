@@ -42,6 +42,7 @@ if(CrossCompiling)
         src/drivers/logic/QualityCheck.cpp
         src/drivers/logic/Case.cpp
         src/drivers/LED.cpp
+        src/drivers/uart/uart.cpp    
     )
     target_include_directories(labs
         PUBLIC 
@@ -52,8 +53,8 @@ if(CrossCompiling)
     pico_set_program_version(labs "0.2")
 
     # select UART for standard IO
-    pico_enable_stdio_uart(labs 1)
-    pico_enable_stdio_usb(labs 0)
+    pico_enable_stdio_uart(labs 0)
+    pico_enable_stdio_usb(labs 1)
 
     # compile the PIO file
     pico_generate_pio_header(labs ${CMAKE_CURRENT_LIST_DIR}/src/drivers/WS2812/WS2812.pio)
@@ -70,6 +71,7 @@ if(CrossCompiling)
         hardware_watchdog
         hardware_clocks
         hardware_pwm
+        hardware_adc
         
     )
 
@@ -101,8 +103,7 @@ else()
         tests/mocks/ws2812.cpp
         src/drivers/logic/Case.cpp
         src/drivers/LED.cpp
-
-
+        src/drivers/uart/uart.cpp
     )
     target_include_directories(labs
         PUBLIC 

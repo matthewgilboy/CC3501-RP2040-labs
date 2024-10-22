@@ -25,7 +25,7 @@
 #define HOME1 3
 
 bool run = 1;
-int freq = 19000;  // Frequency for steps
+int freq = 495;  // Frequency for steps
 
 // Function to initialize pins
 void InitialisePins() {

@@ -6,25 +6,20 @@
 static uint slice_num;                     // Variable to store the PWM slice number
 static uint32_t pwm_wrap;                  // Variable to store the PWM wrap value
 
-// Function to initialize the SG90 servo
-void init_SG90_servo(){
-    // Set the GPIO pin function to PWM
-    gpio_set_function(SRVSIG, GPIO_FUNC_PWM);
-
-    // Get the PWM slice number corresponding to the SRVSIG pin
-    //slice_num = pwm_gpio_to_slice_num(SRVSIG);
-
-    // Calculate the wrap value for the PWM based on the desired frequency
-    pwm_wrap = (125000000 / PWM_FREQUENCY) - 1; // 125000000 is the clock frequency; adjust for PWM_FREQUENCY
-    // Set the PWM wrap value for the specified slice
-    //pwm_set_wrap(slice_num, pwm_wrap);
+void servoMoveLeft() {
+    // Set SRVSIG to high (3.3V)
+    gpio_put(SRVSIG, 1);
+    sleep_ms(LEFT_HIGH_TIME_MS); // Keep it high for 2ms
+    // Set SRVSIG to low (0V)
+    gpio_put(SRVSIG, 0);
+    sleep_ms(PERIOD_MS - LEFT_HIGH_TIME_MS); // Keep it low for the remainder (18ms)
 }
 
-// Function to set the position of the SG90 servo based on pulse width
-void set_SG90_servo_pos(uint16_t pulse_width){
-    // Calculate the compare value for the PWM channel based on the desired pulse width
-    uint32_t pwm_compare = (pulse_width * pwm_wrap) / (1000000 / PWM_FREQUENCY);
-
-    // Set the PWM channel level for the servo to the calculated compare value
-    //pwm_set_chan_level(slice_num, PWM_CHAN_A, pwm_compare);
+void servoMoveRight() {
+    // Set SRVSIG to high (3.3V)
+    gpio_put(SRVSIG, 1);
+    sleep_ms(RIGHT_HIGH_TIME_MS); // Keep it high for 1ms
+    // Set SRVSIG to low (0V)
+    gpio_put(SRVSIG, 0);
+    sleep_ms(PERIOD_MS - RIGHT_HIGH_TIME_MS); // Keep it low for the remainder (19ms)
 }
